@@ -9,13 +9,13 @@
 
 module.exports = {
 
-  // 数据库配置 mongodb/mysql/local
-  // 目前仅支持配置 mongodb
+  // database mongodb/mysql/local
+  // ONLY mongodb NOW
   connections: {
     mongodb: {
       host: '127.0.0.1',
       port: 27017,
-      database: 'wan',
+      database: 'test',
       options: {
         server: {
           poolSize: 100
@@ -27,7 +27,7 @@ module.exports = {
   // 网页存储
   file: {
     // 是否存储下载的网页
-    store: false,
+    store: true,
     // 存放的位置
     dir: './resources/'
   }

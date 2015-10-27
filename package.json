@@ -5,7 +5,6 @@
   "description": "wan news spider",
   "keywords": [],
   "dependencies": {
-    "async": "^1.4.2",
     "bluebird": "^2.10.2",
     "cheerio": "^0.19.0",
     "continuation-local-storage": "^3.1.4",
@@ -15,9 +14,9 @@
     "lodash": "^3.10.1",
     "mongoose": "^4.1.11",
     "mysql": "^2.9.0",
+    "node-schedule": "^0.2.9",
     "redis": "^2.2.5",
-    "request": "^2.65.0",
-    "superagent": "^1.4.0"
+    "request": "^2.65.0"
   },
   "scripts": {
     "debug": "node debug app.js",

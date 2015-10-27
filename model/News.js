@@ -11,8 +11,7 @@ var mongoose = require('mongoose');
 
 var UserSchema = {
   id: mongoose.Schema.ObjectId,		// mongodb主键
-  timestamp: {type: Number, default: Date.now},		// 数据的时间
-  link: {type: String, index: true}
+  link: {type: String, index: true, unique:true}
 };
 
 

@@ -8,14 +8,15 @@
  */
 
 /**
- * loading store config
+ * loading config
  */
-var local = require('../config/store');
+var storage = require('../config/storage');
+var schedule = require('../config/schedule');
 
 var models;
 // use mongodb
-if (local.connections.mongodb) {
-  models = require('./mongo')(local.connections.mongodb);
+if (storage.connections.mongodb) {
+  models = require('./mongo')(storage.connections.mongodb);
 }
 
 var _ = require('lodash');
@@ -43,8 +44,8 @@ function loadRssConfigs() {
 
   var rssConfigsDir = process.cwd() + '/config/rss/';
   var resourcesDir;
-  if (local.file.store) {
-    resourcesDir = process.cwd() + fixSlash(local.file.dir);
+  if (storage.file.store) {
+    resourcesDir = process.cwd() + fixSlash(storage.file.dir);
   }
 
   var confFiles = fs.readdirSync(rssConfigsDir);
@@ -52,9 +53,14 @@ function loadRssConfigs() {
   for (var i in confFiles) {
     if (fs.statSync(rssConfigsDir + confFiles[i]).isFile()) {
       var config = require(rssConfigsDir + confFiles[i]);
+      // set source
+      var name = confFiles[i].replace(/\.js$/i, '');
+      if (!config.source) {
+        config.source = name;
+      }
       // fix file storage path
       if (resourcesDir) {
-        config.resourcesDir = resourcesDir + config.name + '/';
+        config.resourcesDir = resourcesDir + config.source + '/';
         if (!fs.existsSync(config.resourcesDir)) {
           fs.mkdirSync(config.resourcesDir);
         }
@@ -67,6 +73,6 @@ function loadRssConfigs() {
 
 module.exports = {
   rssConfigs: loadRssConfigs,
-  config: local,
+  config: _.merge(storage, schedule),
   models: models
 };

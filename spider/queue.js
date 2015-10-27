@@ -28,7 +28,7 @@ util.inherits(QueueEmit, EventEmitter);
  * @param config
  * @param urls
  */
-QueueEmit.prototype.download = function (config, urls) {
+QueueEmit.prototype.fetch = function (config, urls) {
   this.emit(QueueEmit.EVENT.FETCH, config, urls);
 };
 

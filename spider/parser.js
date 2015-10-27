@@ -10,7 +10,7 @@ var _ = require('lodash');
 var Promise = require('bluebird');
 var FeedParser = require('feedparser');
 
-var postOptions = ['title', 'description', 'summary', 'date', 'link', 'guid', 'author', 'comments', 'origlink', 'image', 'source', 'categories', 'enclosures'];
+var postOptions = ['title', 'description', 'summary', 'date', 'pubDate', 'link', 'guid', 'author', 'comments', 'origlink', 'image', 'source', 'categories', 'enclosures'];
 //var siteInfoOption = ['title', 'description', 'date', 'link', 'xmlurl', 'author', 'favicon', 'copyright', 'generator', 'image'];
 
 function parse(stream, options) {

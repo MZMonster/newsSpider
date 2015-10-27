@@ -12,11 +12,19 @@ var _ = require('lodash');
 var fs = require('fs');
 var request = require('request');
 var Promise = require('bluebird');
+var schedule = require('node-schedule');
 
 var queue = require('./spider/queue');
 var init = require('./spider/initial');
 var fetcher = require('./spider/fetcher');
 var parser = require('./spider/parser');
+
+/**
+ * constants
+ * @type {number}
+ */
+var MILLISECONDS_OF_DAY = 24 * 3600 * 1000;
+var MILLISECONDS_OF_MINUTE = 60 * 1000;
 
 /**
  * init all rss news config
@@ -27,6 +35,22 @@ var rssConfigs = init.rssConfigs();
  * orm models
  */
 var models = init.models;
+
+/**
+ * get 00:00:00
+ * @returns {Date}
+ */
+function getTodayBegin() {
+  var date = new Date();
+  return new Date(date.getTime()
+      // 修正UTC时区差 当天归00:00:00
+    - (date.getTime() - date.getTimezoneOffset() * MILLISECONDS_OF_MINUTE) % (MILLISECONDS_OF_DAY))
+}
+
+/**
+ * today
+ */
+var today = getTodayBegin();
 
 console.log(new Date().toLocaleString(), 'Init all config and parser');
 
@@ -40,7 +64,7 @@ var queueEmit = new queue();
  * fetch
  */
 queueEmit.on(queue.EVENT.FETCH, function (config, urls) {
-  // 从startUrl开始
+  // urls begin
   urls.forEach(function (url) {
     fetcher.fetch(url)
       .then(function (stream) {
@@ -48,11 +72,10 @@ queueEmit.on(queue.EVENT.FETCH, function (config, urls) {
         queueEmit.file(config, url, stream);
         queueEmit.parse(config, url, stream);
         // log
-        queueEmit.log(config, 'download:' + url);
-        return '';
+        queueEmit.log(config, 'fetch:' + url);
       })
       .catch(function (err) {
-        queueEmit.error(config, 'download:' + url, err);
+        queueEmit.error(config, 'fetch:' + url, err);
       });
   });
 });
@@ -64,10 +87,10 @@ queueEmit.on(queue.EVENT.FILE, function (config, uri, stream) {
   if (config.resourcesDir) {
     var file = fs.createWriteStream(config.resourcesDir + encodeURIComponent(uri) + new Date());
     file.on('error', function (err) {
-      queueEmit.error(config, 'write:' + uri, err)
+      queueEmit.error(config, 'file:' + uri, err)
     });
     stream.pipe(file);
-    queueEmit.log(config, 'write:' + uri)
+    queueEmit.log(config, 'file:' + uri)
   }
 });
 
@@ -77,13 +100,34 @@ queueEmit.on(queue.EVENT.FILE, function (config, uri, stream) {
 queueEmit.on(queue.EVENT.PARSE, function (config, url, stream) {
   parser.parse(stream)
     .then(function (posts) {
-      console.log(posts);
+      // db
+      return Promise.each(posts, function (post) {
+        if (post.pubDate > today) {
+          return Promise.resolve(models['News'].create(_.merge(post, {source: config.source})));
+        } else {
+          throw new Error('Only parse today rss');
+        }
+      }).catch(function (err) {
+        if (_.startsWith(err.message, 'E11000 duplicate key error index')) {
+          throw new Error('Only parse today rss');
+        }
+        throw err;
+      });
+    })
+    .then(function () {
       // log
       queueEmit.log(config, 'parse:' + url);
-      return '';
+      // next
+      var nexts = config.nexts();
+      queueEmit.fetch(config, nexts);
     })
     .catch(function (err) {
-      queueEmit.error(config, 'parse:' + url, err);
+      if (err.message === 'Only parse today rss') {
+        // log
+        queueEmit.log(config, 'over:' + url);
+      } else {
+        queueEmit.error(config, 'parse:' + url, err);
+      }
     });
 });
 
@@ -91,18 +135,26 @@ queueEmit.on(queue.EVENT.PARSE, function (config, url, stream) {
  * log
  */
 queueEmit.on(queue.EVENT.LOG, function (config, msg) {
-  console.log('LOG', config.name, msg);
+  console.log('LOG', config.source, msg);
 });
 
 /**
  * error event
  */
 queueEmit.on(queue.EVENT.ERROR, function (config, msg, err) {
-  console.log('ERROR', config.name, msg, err);
+  console.log('ERROR', config.source, msg, err);
 });
 
-// starts
-rssConfigs.forEach(function (config) {
-  queueEmit.emit(queue.EVENT.FETCH, config, config.startUrls);
+
+/**
+ * schedule to get rss
+ */
+schedule.scheduleJob(init.config.cron, function () {
+  // a cache
+  today = getTodayBegin();
+  // starts
+  rssConfigs.forEach(function (config) {
+    queueEmit.fetch(config, config.startUrls);
+  });
 });
 

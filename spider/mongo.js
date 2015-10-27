@@ -7,7 +7,7 @@
  *
  */
 
-var mongoose = require('mongoose');
+var mongo = require('mongoose');
 
 function initMongo(config) {
 
@@ -15,7 +15,7 @@ function initMongo(config) {
 
   console.info(new Date().toLocaleString(), 'Connect to ' + uri);
 
-  var connection = mongoose.connect(uri, config.options).connection;
+  var connection = mongo.connect(uri, config.options).connection;
   connection.on('error', function (err) {
     console.error(new Date().toLocaleString(), 'MongoDB connection error', err);
   });
@@ -42,11 +42,11 @@ function initMongo(config) {
    * @private
    */
   function _addModel(name, modelSchema) {
-    var schema = new mongoose.Schema(modelSchema.schema, {strict: false});
+    var schema = new mongo.Schema(modelSchema.schema, {strict: false});
     schema.methods = modelSchema.methods || {};
     schema.statics = modelSchema.statics || {};
 
-    mongoose[name] = mongoose.model(name, schema, name);  // bind on sails.mongoose
+    mongoose[name] = mongo.model(name, schema, name);  // bind on sails.mongoose
   }
 
   return mongoose;

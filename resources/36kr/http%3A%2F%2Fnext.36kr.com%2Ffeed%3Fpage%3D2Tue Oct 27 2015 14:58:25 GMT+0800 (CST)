@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:next.36kr.com,2005:/feed?page=2</id>
+  <link rel="alternate" type="text/html" href="http://next.36kr.com"/>
+  <link rel="self" type="application/atom+xml" href="http://next.36kr.com/feed?page=2"/>
+  <link rel="next" href="http://next.36kr.com/feed?page=3"/>
+  <title>NEXT</title>
+  <updated>2015-10-27T06:58:25Z</updated>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21147</id>
+    <published>2015-10-27T09:19:08+08:00</published>
+    <updated>2015-10-27T14:58:14+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21147"/>
+    <title>Alien Skin Snap Art</title>
+    <content type="html">大名鼎鼎的模拟艺术风格插件，可以模拟油画、卡通、水彩等多种画面风格</content>
+    <author>
+      <name>叶明</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21146</id>
+    <published>2015-10-27T09:15:32+08:00</published>
+    <updated>2015-10-27T14:53:11+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21146"/>
+    <title>Command Center for Instagram</title>
+    <content type="html">在 iPhone 上查看 Instagram 统计信息</content>
+    <author>
+      <name>Loading</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21145</id>
+    <published>2015-10-27T09:14:32+08:00</published>
+    <updated>2015-10-27T14:57:59+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21145"/>
+    <title>Alien Skin Exposure 7</title>
+    <content type="html">Exposure 系列主要用来模拟胶片的色彩和质感，在摄影界一直有着不错的口碑</content>
+    <author>
+      <name>叶明</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21144</id>
+    <published>2015-10-27T09:13:07+08:00</published>
+    <updated>2015-10-27T14:53:10+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21144"/>
+    <title>Blackspace</title>
+    <content type="html">在 OS X 的 docker 上增加空白图标的应用，可以在 docker 上给应用分组</content>
+    <author>
+      <name>Loading</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21143</id>
+    <published>2015-10-27T09:09:25+08:00</published>
+    <updated>2015-10-27T14:53:11+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21143"/>
+    <title>Posthaven</title>
+    <content type="html">在线博客平台，提供简洁稳定的博客服务</content>
+    <author>
+      <name>Michael</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21142</id>
+    <published>2015-10-27T09:00:55+08:00</published>
+    <updated>2015-10-27T14:53:08+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21142"/>
+    <title>Prevue</title>
+    <content type="html">快速创建优美幻灯片的在线工具</content>
+    <author>
+      <name>Michael</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21141</id>
+    <published>2015-10-27T08:57:00+08:00</published>
+    <updated>2015-10-27T14:53:10+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21141"/>
+    <title>AtvImg</title>
+    <content type="html">实现 Apple TV 鼠标悬浮效果的 JS 插件，可以快速应用到网页中</content>
+    <author>
+      <name>Michael</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21140</id>
+    <published>2015-10-27T08:49:40+08:00</published>
+    <updated>2015-10-27T14:53:09+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21140"/>
+    <title>Squatty Potty</title>
+    <content type="html">在马桶上蹲坑的实现方式</content>
+    <author>
+      <name>Michael</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21139</id>
+    <published>2015-10-27T08:44:49+08:00</published>
+    <updated>2015-10-27T14:53:13+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21139"/>
+    <title>DiceWARE</title>
+    <content type="html">人脑密码定制系统，创建安全且独一无二的密码</content>
+    <author>
+      <name>Michael</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21138</id>
+    <published>2015-10-27T07:40:51+08:00</published>
+    <updated>2015-10-27T14:57:43+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21138"/>
+    <title>Sketch 3.4</title>
+    <content type="html">新增实时预览等屌炸天功能</content>
+    <author>
+      <name>cellier</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21133</id>
+    <published>2015-10-27T00:29:03+08:00</published>
+    <updated>2015-10-27T14:58:12+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21133"/>
+    <title>ZEALER for iOS</title>
+    <content type="html">ZEALER 移动版发布，一个国内专注于硬件测评的网站</content>
+    <author>
+      <name>Pixelsir</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21124</id>
+    <published>2015-10-27T00:20:14+08:00</published>
+    <updated>2015-10-27T14:57:58+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21124"/>
+    <title>404 : Back to the Future</title>
+    <content type="html">一个炫到爆的 404 页面</content>
+    <author>
+      <name>Dom</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21132</id>
+    <published>2015-10-27T00:14:14+08:00</published>
+    <updated>2015-10-27T14:57:42+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21132"/>
+    <title>Surge</title>
+    <content type="html">利用 iOS9 的 Network Extension 新特性，用来网络抓包调试和代理工具</content>
+    <author>
+      <name>LinkitLoo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21129</id>
+    <published>2015-10-27T00:05:07+08:00</published>
+    <updated>2015-10-27T14:53:10+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21129"/>
+    <title>Ligify</title>
+    <content type="html">类似 Live Gif，将 Live Photos 制作成 GIF 或 MOV 分享给好友</content>
+    <author>
+      <name>DonnerDie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21101</id>
+    <published>2015-10-27T00:04:07+08:00</published>
+    <updated>2015-10-27T14:55:11+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21101"/>
+    <title>科技早班车</title>
+    <content type="html">每日头条全球科技新闻，短、快、轻，一手掌握新鲜科技资讯和互联网新闻</content>
+    <author>
+      <name>liujwing</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21109</id>
+    <published>2015-10-27T00:03:07+08:00</published>
+    <updated>2015-10-27T14:53:16+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21109"/>
+    <title>医简单</title>
+    <content type="html">感冒发烧，上门输液，由用户附近的社区诊所来提供上门医疗服务</content>
+    <author>
+      <name>智慧Cara·医疗</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21090</id>
+    <published>2015-10-27T00:03:07+08:00</published>
+    <updated>2015-10-27T14:58:14+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21090"/>
+    <title>一度人脉</title>
+    <content type="html">搜信息上百度，找人脉用一度，250 万精英人脉一键对接</content>
+    <author>
+      <name>marketing</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21071</id>
+    <published>2015-10-27T00:03:07+08:00</published>
+    <updated>2015-10-27T14:58:11+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21071"/>
+    <title>好唱</title>
+    <content type="html">掌心上的录音棚，让用户 1 秒变歌神</content>
+    <author>
+      <name>好唱</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21130</id>
+    <published>2015-10-27T00:02:08+08:00</published>
+    <updated>2015-10-27T14:58:07+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21130"/>
+    <title>芒果家</title>
+    <content type="html">基于物联网时代的家庭信息共享平台和硬件管理交互平台</content>
+    <author>
+      <name>咘瓜</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21127</id>
+    <published>2015-10-27T00:02:08+08:00</published>
+    <updated>2015-10-27T14:58:09+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21127"/>
+    <title>ResumUP</title>
+    <content type="html">简历工具，快速将你的文字简历可视化，更吸引人</content>
+    <author>
+      <name>Clek</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21119</id>
+    <published>2015-10-27T00:02:08+08:00</published>
+    <updated>2015-10-27T14:58:03+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21119"/>
+    <title>Quotle</title>
+    <content type="html">方便爱看书的人制作 Quotes 卡片，分享到社交网络</content>
+    <author>
+      <name>Baay</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21114</id>
+    <published>2015-10-27T00:02:08+08:00</published>
+    <updated>2015-10-27T14:58:16+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21114"/>
+    <title>Classeur</title>
+    <content type="html">简洁，轻巧的 Markdown 写作工具</content>
+    <author>
+      <name>Su</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21113</id>
+    <published>2015-10-27T00:02:07+08:00</published>
+    <updated>2015-10-27T14:56:00+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21113"/>
+    <title>Kangaroo</title>
+    <content type="html">富可视发布全球最小的便携式 Windows 10 台式电脑，99 美元</content>
+    <author>
+      <name>LIMIKEUI</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21112</id>
+    <published>2015-10-27T00:02:07+08:00</published>
+    <updated>2015-10-27T14:53:15+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21112"/>
+    <title>ZipChip</title>
+    <content type="html">创意飞碟玩具，鼓励你去户外玩耍，10 美元</content>
+    <author>
+      <name>LIMIKEUI</name>
+    </author>
+  </entry>
+  <entry>
+    <id>tag:next.36kr.com,2005:Note/21111</id>
+    <published>2015-10-27T00:02:07+08:00</published>
+    <updated>2015-10-27T14:53:11+08:00</updated>
+    <link rel="alternate" type="text/html" href="http://next.36kr.com/posts/21111"/>
+    <title>Taskler</title>
+    <content type="html">又一款我们审美疲劳的 To-Do 应用，利用色彩帮你分清主次</content>
+    <author>
+      <name>Roy</name>
+    </author>
+  </entry>
+</feed>

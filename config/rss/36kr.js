@@ -9,10 +9,20 @@
 
 module.exports = {
 
-  name: '36kr',
   /**
-   * 开始的dir
+   * from source
    */
-  startUrls: ['http://next.36kr.com/feed']
+  source: '36kr',
+  /**
+   * start urls
+   */
+  startUrls: ['http://next.36kr.com/feed'],
+
+  nexts: function () {
+    if (!this.page) {
+      this.page = 2;
+    }
+    return ['http://next.36kr.com/feed?page=' + this.page++];
+  }
 };
 
