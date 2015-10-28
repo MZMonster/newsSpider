@@ -48,9 +48,9 @@ function getTodayBegin() {
 }
 
 /**
- * today
+ * today cache
  */
-var today = getTodayBegin();
+var today;
 
 console.log(new Date().toLocaleString(), 'Init all config and parser');
 
@@ -102,12 +102,14 @@ queueEmit.on(queue.EVENT.PARSE, function (config, url, stream) {
     .then(function (posts) {
       // db
       return Promise.each(posts, function (post) {
+        // only today
         if (post.pubDate > today) {
           return Promise.resolve(models['News'].create(_.merge(post, {source: config.source})));
         } else {
           throw new Error('Only parse today rss');
         }
       }).catch(function (err) {
+        // rss exist
         if (_.startsWith(err.message, 'E11000 duplicate key error index')) {
           throw new Error('Only parse today rss');
         }
@@ -118,8 +120,10 @@ queueEmit.on(queue.EVENT.PARSE, function (config, url, stream) {
       // log
       queueEmit.log(config, 'parse:' + url);
       // next
-      var nexts = config.nexts();
-      queueEmit.fetch(config, nexts);
+      if (config.nexts) {
+        var nexts = config.nexts();
+        queueEmit.fetch(config, nexts);
+      }
     })
     .catch(function (err) {
       if (err.message === 'Only parse today rss') {

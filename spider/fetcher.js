@@ -6,10 +6,10 @@
  * @description
  *
  */
-
+var fs = require('fs');
+var es = require('event-stream');
 var request = require('request');
 var Promise = require('bluebird');
-var fs = require('fs');
 var iconv = require('iconv-lite');
 
 
@@ -36,6 +36,7 @@ function fetch(url) {
     req.on('error', reject);
     req.on('response', function (res) {
       if (res.statusCode != 200) return this.emit('error', new Error('Bad status code'));
+
       var encoding = res.headers['content-encoding'] || 'identity'
         , charset  = getParams(res.headers['content-type'] || '').charset;
       res = maybeDecompress(res, encoding);
@@ -57,8 +58,27 @@ function maybeDecompress(res, encoding) {
 }
 
 function maybeTranslate(res, charset) {
-  // Use iconv if its not utf8 already.
-  if (!iconv && charset && !/utf-*8/i.test(charset)) {
+
+  if (!charset) {
+    res = res.pipe(es.through(function (data) {
+
+      //get charset from <?xml version="1.0" encoding="gb2312"?><rss version="2.0">
+      //then convert gb2312,gbk,big5 etc to utf-8
+
+      var result = data.toString('utf-8');
+
+      var meta = result.match(/<\?(.*?)\?>/g);
+      if (meta !== null) {
+        meta = meta[0].toString().match(/encoding="(.*?)"\?>/g);
+        charset = meta.toString().split('"')[1];
+      }
+
+      //iconv-lite , which can support windows
+      result = iconv.decode(data, charset);
+      this.emit('data', result);
+    }));
+  } else {
+    // Use iconv if its not utf8 already.
     try {
       console.log('Converting from charset %s to utf-8', charset);
       // If we're using iconv, stream will be the output of iconv
