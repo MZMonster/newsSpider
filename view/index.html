@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <meta charset="UTF-8">
+    <title>rss新闻列表</title>
+</head>
+<body>
+rss网站来源: 36kr, 163tech, knewSmart, leikeji, pingwest, sspai, tech2ipo, wuphone
+<input type="text" id="source" />
+<input type="submit" value="查询" onclick="getRss();"/>
+
+<ul id="rss-list"></ul>
+
+</body>
+</html>
+
+<script>
+    function getRss() {
+        var source = document.getElementById('source').value;
+        $.get('/rss/list?source=' + source, function (datas) {
+            var rssList = ''
+                    , tmp;
+            datas.forEach(function (data) {
+                tmp = '<li>' +
+                        '<a target="_blank" href="' + data.link + '">' + data.title + '</a>'
+                        + '<ul>'
+                        + '<li>发布:' + new Date(data.pubDate).toLocaleString() + '</li>';
+                tmp += '<li>来源:' + data.source + '</li>';
+                if (data.author) {
+                    tmp += '<li>作者: ' + data.author + '</li>'
+
+                }
+                tmp += '<li><button onclick="toggleWords(this);">展开</button>' +
+                        '<div style="display: none">' + data.description + '</span></li>'
+                        + '</ul>'
+                        + '</li>';
+                rssList += tmp;
+            });
+            document.getElementById('rss-list').innerHTML = rssList;
+        })
+    }
+
+    window.onload = getRss();
+
+    function toggleWords(obj) {
+        var childs = obj.parentNode.childNodes;
+        if (childs[1].style.display === 'none') {
+            childs[1].style.display = 'inline';
+            childs[0].innerHTML = '收起';
+        } else {
+            childs[1].style.display = 'none';
+            childs[0].innerHTML = '展开';
+        }
+
+    }
+</script>

@@ -18,7 +18,10 @@ var queue = require('./spider/queue');
 var init = require('./spider/initial');
 var fetcher = require('./spider/fetcher');
 var parser = require('./spider/parser');
-var utils = require('./lib/utils');
+
+// express
+var express = require('express');
+var app = express();
 
 /**
  * constants
@@ -150,16 +153,42 @@ queueEmit.on(queue.EVENT.ERROR, function (config, msg, err) {
   console.log('ERROR', config.source, msg, err);
 });
 
+// index.html
+app.get('/', function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
+  res.end(fs.readFileSync('./view/index.html'));
+});
+
+// rss list
+app.get('/rss/list', function (req, res) {
+
+  var query = {};
+
+  if (req.query.source) {
+    query = {source: req.query.source}
+  }
+
+  Promise.resolve(models['News'].find(query).sort({pubDate: -1}))
+    .then(function (data) {
+      res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
+      res.end(JSON.stringify(data, null, 4));
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+});
 
 /**
  * schedule to get rss
  */
-//schedule.scheduleJob(init.config.cron, function () {
+schedule.scheduleJob(init.config.cron, function () {
   // a cache
   today = getTodayBegin();
   // starts
   rssConfigs.forEach(function (config) {
     queueEmit.fetch(config, config.startUrls);
   });
-//});
+});
+
+app.listen(3003);
 

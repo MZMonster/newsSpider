@@ -13,10 +13,10 @@ module.exports = {
    * start urls
    */
   startUrls: [
-    'http://tech.163.com/special/00091JPQ/techimportant.xml'
-    //'http://tech.163.com/special/00091JPQ/rssinternet.xml',
-    //'http://tech.163.com/special/00091JPQ/rssit.xml',
-    //'http://tech.163.com/special/00091JPQ/rsstongxin.xml'
+    'http://tech.163.com/special/00091JPQ/techimportant.xml',
+    'http://tech.163.com/special/00091JPQ/rssinternet.xml',
+    'http://tech.163.com/special/00091JPQ/rssit.xml',
+    'http://tech.163.com/special/00091JPQ/rsstongxin.xml'
   ]
 
 };
