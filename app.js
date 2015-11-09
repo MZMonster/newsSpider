@@ -18,6 +18,7 @@ var queue = require('./spider/queue');
 var init = require('./spider/initial');
 var fetcher = require('./spider/fetcher');
 var parser = require('./spider/parser');
+var utils = require('./lib/utils');
 
 /**
  * constants
@@ -153,12 +154,12 @@ queueEmit.on(queue.EVENT.ERROR, function (config, msg, err) {
 /**
  * schedule to get rss
  */
-schedule.scheduleJob(init.config.cron, function () {
+//schedule.scheduleJob(init.config.cron, function () {
   // a cache
   today = getTodayBegin();
   // starts
   rssConfigs.forEach(function (config) {
     queueEmit.fetch(config, config.startUrls);
   });
-});
+//});
 
