@@ -190,5 +190,5 @@ schedule.scheduleJob(init.config.cron, function () {
   });
 });
 
-app.listen(3003);
+app.listen(init.config.port);
 
