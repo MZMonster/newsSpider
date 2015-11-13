@@ -31,7 +31,7 @@ var MILLISECONDS_OF_DAY = 24 * 3600 * 1000;
 var MILLISECONDS_OF_MINUTE = 60 * 1000;
 
 /**
- * init all rss news config
+ * init all rss New config
  * @type {Array}
  */
 var rssConfigs = init.rssConfigs();
@@ -108,7 +108,7 @@ queueEmit.on(queue.EVENT.PARSE, function (config, url, stream) {
       return Promise.each(posts, function (post) {
         // only today
         if (post.pubDate > today) {
-          return Promise.resolve(models['News'].create(_.merge(post, {source: config.source})));
+          return Promise.resolve(models['New'].create(_.merge(post, {source: config.source})));
         } else {
           throw new Error('Only parse today rss');
         }
@@ -143,6 +143,11 @@ queueEmit.on(queue.EVENT.PARSE, function (config, url, stream) {
  * log
  */
 queueEmit.on(queue.EVENT.LOG, function (config, msg) {
+  Promise.resolve(models['Log'].create({
+    type: 'LOG',
+    message: msg,
+    config: config
+  }));
   console.log('LOG', config.source, msg);
 });
 
@@ -150,6 +155,12 @@ queueEmit.on(queue.EVENT.LOG, function (config, msg) {
  * error event
  */
 queueEmit.on(queue.EVENT.ERROR, function (config, msg, err) {
+  Promise.resolve(models['Log'].create({
+    type: 'ERROR',
+    message: msg,
+    err: err.toString(),
+    config: config
+  }));
   console.log('ERROR', config.source, msg, err);
 });
 
@@ -162,13 +173,15 @@ app.get('/', function (req, res) {
 // rss list
 app.get('/rss/list', function (req, res) {
 
+  console.log(req.url);
+
   var query = {};
 
-  if (req.query.source) {
-    query = {source: req.query.source}
+  if (req.query.title) {
+    query.title = new RegExp(req.query.title, 'gi');
   }
 
-  Promise.resolve(models['News'].find(query).sort({pubDate: -1}))
+  Promise.resolve(models['New'].find(query).sort({pubDate: -1}))
     .then(function (data) {
       res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
       res.end(JSON.stringify(data, null, 4));

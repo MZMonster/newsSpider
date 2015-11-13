@@ -8,7 +8,7 @@
 </head>
 <body>
 rss网站来源: 36kr, 163tech, knewSmart, leikeji, pingwest, sspai, tech2ipo, wuphone
-<input type="text" id="source" />
+<input type="text" id="title" />
 <input type="submit" value="查询" onclick="getRss();"/>
 
 <ul id="rss-list"></ul>
@@ -18,8 +18,8 @@ rss网站来源: 36kr, 163tech, knewSmart, leikeji, pingwest, sspai, tech2ipo, w
 
 <script>
     function getRss() {
-        var source = document.getElementById('source').value;
-        $.get('/rss/list?source=' + source, function (datas) {
+        var title = document.getElementById('title').value;
+        $.get('/rss/list?title=' + title, function (datas) {
             var rssList = ''
                     , tmp;
             datas.forEach(function (data) {

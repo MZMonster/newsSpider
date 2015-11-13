@@ -9,14 +9,15 @@
 
 var mongoose = require('mongoose');
 
-var UserSchema = {
+var NewSchema = {
   id: mongoose.Schema.ObjectId,		// mongodb主键
-  link: {type: String, index: true, unique:true}
+  link: {type: String, index: true, unique:true},
+  title: {type: String, index: true}
 };
 
 
 module.exports = {
-  schema: UserSchema,
+  schema: NewSchema,
 
   //	Entity Method
   methods: {},
