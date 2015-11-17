@@ -144,6 +144,7 @@ queueEmit.on(queue.EVENT.PARSE, function (config, url, stream) {
  */
 queueEmit.on(queue.EVENT.LOG, function (config, msg) {
   Promise.resolve(models['Log'].create({
+    time: new Date(),
     type: 'LOG',
     message: msg,
     config: config
@@ -156,6 +157,7 @@ queueEmit.on(queue.EVENT.LOG, function (config, msg) {
  */
 queueEmit.on(queue.EVENT.ERROR, function (config, msg, err) {
   Promise.resolve(models['Log'].create({
+    time: new Date(),
     type: 'ERROR',
     message: msg,
     err: err.toString(),
@@ -199,6 +201,9 @@ schedule.scheduleJob(init.config.cron, function () {
   today = getTodayBegin();
   // starts
   rssConfigs.forEach(function (config) {
+    if (config.init) {
+      config.init();
+    }
     queueEmit.fetch(config, config.startUrls);
   });
 });

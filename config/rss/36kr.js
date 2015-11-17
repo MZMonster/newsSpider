@@ -23,6 +23,10 @@ module.exports = {
       this.page = 2;
     }
     return ['http://next.36kr.com/feed?page=' + this.page++];
+  },
+
+  init: function () {
+    this.page = 0;
   }
 };
 

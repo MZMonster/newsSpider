@@ -26,7 +26,7 @@ var headers = {
 function fetch(url) {
   return new Promise(function (resolve, reject) {
     // Define our streams
-    var req = request(url, {timeout: 10000, pool: false});
+    var req = request(url, {timeout: 60000, pool: false});
     req.setMaxListeners(50);
     // Some feeds do not respond without user-agent and accept headers.
     req.setHeader('user-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11) AppleWebKit/601.1.56 (KHTML, like Gecko) Version/9.0 Safari/601.1.56');
