@@ -11,7 +11,7 @@ var es = require('event-stream');
 var request = require('request');
 var Promise = require('bluebird');
 var iconv = require('iconv-lite');
-
+var stream = require('stream');
 
 var headers = {
   "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -21,10 +21,10 @@ var headers = {
 /**
  * 封装成Promise, stream
  * @param url
+ * @param cb {Function}
  * @returns {bluebird|exports|module.exports}
  */
-function fetch(url) {
-  return new Promise(function (resolve, reject) {
+function fetch(url, cb) {
     // Define our streams
     var req = request(url, {timeout: 60000, pool: false});
     req.setMaxListeners(50);
@@ -33,18 +33,34 @@ function fetch(url) {
     req.setHeader('accept', 'text/html,application/xhtml+xml');
 
     // Define our handlers
-    req.on('error', reject);
+    req.on('error', cb);
     req.on('response', function (res) {
       if (res.statusCode != 200) return this.emit('error', new Error('Bad status code'));
 
-      var encoding = res.headers['content-encoding'] || 'identity'
-        , charset  = getParams(res.headers['content-type'] || '').charset;
-      res = maybeDecompress(res, encoding);
-      res = maybeTranslate(res, charset);
+      var body = [], total_len = 0;
 
-      return resolve(res);
+      res.on('data', function (chunk) {
+        if (chunk) {
+          body.push(chunk);
+          total_len += chunk.length;
+        }
+      });
+
+      res.on('end', function () {
+
+        var rs = new stream.PassThrough();
+        body = Buffer.concat(body, total_len);
+        rs.end(body);
+
+        var encoding = res.headers['content-encoding'] || 'identity'
+          , charset  = getParams(res.headers['content-type'] || '').charset;
+        rs = maybeDecompress(rs, encoding);
+        rs = maybeTranslate(rs, charset);
+
+        cb(null, rs);
+      });
+
     });
-  });
 }
 
 function maybeDecompress(res, encoding) {

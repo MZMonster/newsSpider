@@ -12,7 +12,8 @@ var mongoose = require('mongoose');
 var NewSchema = {
   id: mongoose.Schema.ObjectId,		// mongodb主键
   link: {type: String, index: true, unique:true},
-  title: {type: String, index: true}
+  title: {type: String, index: true},
+  source: {type: String, index: true}
 };
 
 

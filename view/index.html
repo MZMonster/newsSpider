@@ -7,9 +7,14 @@
     <title>rss新闻列表</title>
 </head>
 <body>
-rss网站来源: 36kr, 163tech, knewSmart, leikeji, pingwest, sspai, tech2ipo, wuphone
-<input type="text" id="title" />
-<input type="submit" value="查询" onclick="getRss();"/>
+<div id="rss-totals"></div>
+
+<ul>
+    <li>标题：<input type="text" id="title"/></li>
+    <li>内容：<input type="text" id="desc"/></li>
+    <li>来源：<input type="text" id="source"/></li>
+    <li><input type="button" value="搜索" onclick="getRss();"/></li>
+</ul>
 
 <ul id="rss-list"></ul>
 
@@ -18,8 +23,16 @@ rss网站来源: 36kr, 163tech, knewSmart, leikeji, pingwest, sspai, tech2ipo, w
 
 <script>
     function getRss() {
+
+        $.get('/rss/statistic', function (data) {
+            document.getElementById('rss-totals').innerHTML = data;
+        });
+
         var title = document.getElementById('title').value;
-        $.get('/rss/list?title=' + title, function (datas) {
+        var desc = document.getElementById('desc').value;
+        var source = document.getElementById('source').value;
+        var query = 'title=' + title + '&desc=' + desc + '&source=' + source;
+        $.get('/rss/list?' + query, function (datas) {
             var rssList = ''
                     , tmp;
             datas.forEach(function (data) {

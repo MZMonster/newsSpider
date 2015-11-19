@@ -70,17 +70,17 @@ var queueEmit = new queue();
 queueEmit.on(queue.EVENT.FETCH, function (config, urls) {
   // urls begin
   urls.forEach(function (url) {
-    fetcher.fetch(url)
-      .then(function (stream) {
-        // 触发write和parse
-        queueEmit.file(config, url, stream);
-        queueEmit.parse(config, url, stream);
-        // log
-        queueEmit.log(config, 'fetch:' + url);
-      })
-      .catch(function (err) {
+    fetcher.fetch(url, function (err, stream) {
+      if (err) {
         queueEmit.error(config, 'fetch:' + url, err);
-      });
+        return;
+      }
+      // 触发write和parse
+      queueEmit.file(config, url, stream);
+      queueEmit.parse(config, url, stream);
+      // log
+      queueEmit.log(config, 'fetch:' + url);
+    });
   });
 });
 
@@ -94,7 +94,7 @@ queueEmit.on(queue.EVENT.FILE, function (config, uri, stream) {
       queueEmit.error(config, 'file:' + uri, err)
     });
     stream.pipe(file);
-    queueEmit.log(config, 'file:' + uri)
+    queueEmit.log(config, 'file:' + uri);
   }
 });
 
@@ -183,6 +183,14 @@ app.get('/rss/list', function (req, res) {
     query.title = new RegExp(req.query.title, 'gi');
   }
 
+  if (req.query.source) {
+    query.source = req.query.source;
+  }
+
+  if (req.query.desc) {
+    query.description = new RegExp(req.query.desc, 'gi');
+  }
+
   Promise.resolve(models['New'].find(query).sort({pubDate: -1}))
     .then(function (data) {
       res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
@@ -193,10 +201,38 @@ app.get('/rss/list', function (req, res) {
     })
 });
 
+// rss statistic
+app.get('/rss/statistic', function (req, res) {
+
+  console.log(req.url);
+
+  var query = {'$group': {_id: '$source', count: {'$sum': 1}}};
+
+  res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
+
+  models['New'].aggregate(query, function (err, data) {
+    if (err) {
+      console.error(err);
+      return res.end('统计数据出错');
+    }
+    res.end(getTotals(data));
+  });
+});
+
+function getTotals(data) {
+  return _.reduce(data, function (result, value) {
+    if(typeof result === 'string') {
+      return result + ', ' + _.values(value).join(': ');
+    }
+    return _.values(result).join(': ') + ', ' + _.values(value).join(': ')
+  });
+}
+
 /**
  * schedule to get rss
  */
 schedule.scheduleJob(init.config.cron, function () {
+
   // a cache
   today = getTodayBegin();
   // starts
